@@ -1,0 +1,333 @@
+---
+interface Props {
+  images: string[];
+  projectTitle: string;
+  projectId: number;
+}
+
+const { images, projectTitle, projectId } = Astro.props;
+---
+
+<div class="slideshow-container" data-project-id={projectId}>
+  <div class="relative aspect-video bg-gray-200 overflow-hidden rounded-t-lg cursor-pointer group" data-slideshow={projectId}>
+    {images.map((image, index) => (
+      <img
+        src={image}
+        alt={`${projectTitle} - Image ${index + 1}`}
+        class={`slideshow-image absolute w-full h-full object-cover transition-opacity duration-500 ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
+        data-slideshow-id={projectId}
+        data-image-index={index}
+        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23999%22%3E%3Cpath d=%22M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z%22/%3E%3C/svg%3E'"
+      />
+    ))}
+
+    {images.length > 1 && (
+      <>
+        <button
+          class="slideshow-prev absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-10"
+          data-slideshow-id={projectId}
+          aria-label="Previous image"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <button
+          class="slideshow-next absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity z-10"
+          data-slideshow-id={projectId}
+          aria-label="Next image"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+
+        {images.length <= 5 ? (
+          <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+            {images.map((_, index) => (
+              <button
+                class={`slideshow-dot w-2 h-2 rounded-full transition-all ${index === 0 ? 'bg-white w-6' : 'bg-white/50'}`}
+                data-slideshow-id={projectId}
+                data-dot-index={index}
+                aria-label={`Go to image ${index + 1}`}
+              />
+            ))}
+          </div>
+        ) : (
+          <div class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/50 px-3 py-1 rounded-full z-10">
+            <span class="slideshow-counter text-white text-xs font-medium" data-slideshow-id={projectId}>
+              1 / {images.length}
+            </span>
+          </div>
+        )}
+      </>
+    )}
+
+    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+      <div class="bg-white/90 px-4 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
+        <span class="text-sm font-medium text-gray-900">Click to expand</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id={`modal-${projectId}`} class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-4">
+  <button
+    class="modal-close absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+    data-modal-id={projectId}
+    aria-label="Close modal"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+
+  <div class="relative w-full max-w-5xl">
+    <div class="relative aspect-video bg-gray-900">
+      {images.map((image, index) => (
+        <img
+          src={image}
+          alt={`${projectTitle} - Image ${index + 1}`}
+          class={`modal-image absolute w-full h-full object-contain transition-opacity duration-500 ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
+          data-modal-id={projectId}
+          data-image-index={index}
+        />
+      ))}
+
+      {images.length > 1 && (
+        <>
+          <button
+            class="modal-prev absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors"
+            data-modal-id={projectId}
+            aria-label="Previous image"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          <button
+            class="modal-next absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-colors"
+            data-modal-id={projectId}
+            aria-label="Next image"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          {images.length <= 5 ? (
+            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3">
+              {images.map((_, index) => (
+                <button
+                  class={`modal-dot w-3 h-3 rounded-full transition-all ${index === 0 ? 'bg-white w-8' : 'bg-white/50'}`}
+                  data-modal-id={projectId}
+                  data-dot-index={index}
+                  aria-label={`Go to image ${index + 1}`}
+                />
+              ))}
+            </div>
+          ) : (
+            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 px-4 py-2 rounded-full">
+              <span class="modal-counter-inline text-white text-sm font-medium" data-modal-id={projectId}>
+                1 / {images.length}
+              </span>
+            </div>
+          )}
+        </>
+      )}
+    </div>
+
+    <div class="text-center mt-4 text-white">
+      <span class="modal-counter text-sm" data-modal-id={projectId}>
+        1 / {images.length}
+      </span>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ projectId, totalImages: images.length }}>
+  let currentIndex = 0;
+  let autoplayInterval;
+
+  const slideshowContainer = document.querySelector(`[data-slideshow="${projectId}"]`);
+  const slideshowImages = document.querySelectorAll(`img.slideshow-image[data-slideshow-id="${projectId}"]`);
+  const slideshowDots = document.querySelectorAll(`button.slideshow-dot[data-slideshow-id="${projectId}"]`);
+  const slideshowCounter = document.querySelector(`span.slideshow-counter[data-slideshow-id="${projectId}"]`);
+  const slideshowPrev = document.querySelector(`button.slideshow-prev[data-slideshow-id="${projectId}"]`);
+  const slideshowNext = document.querySelector(`button.slideshow-next[data-slideshow-id="${projectId}"]`);
+
+  const modal = document.getElementById(`modal-${projectId}`);
+  const modalImages = document.querySelectorAll(`img.modal-image[data-modal-id="${projectId}"]`);
+  const modalDots = document.querySelectorAll(`button.modal-dot[data-modal-id="${projectId}"]`);
+  const modalCounterInline = document.querySelector(`span.modal-counter-inline[data-modal-id="${projectId}"]`);
+  const modalPrev = document.querySelector(`button.modal-prev[data-modal-id="${projectId}"]`);
+  const modalNext = document.querySelector(`button.modal-next[data-modal-id="${projectId}"]`);
+  const modalClose = document.querySelector(`button.modal-close[data-modal-id="${projectId}"]`);
+  const modalCounter = document.querySelector(`span.modal-counter[data-modal-id="${projectId}"]`);
+
+  function showSlide(index, isModal = false) {
+    const images = isModal ? modalImages : slideshowImages;
+    const dots = isModal ? modalDots : slideshowDots;
+    const counter = isModal ? modalCounterInline : slideshowCounter;
+
+    images.forEach((img, i) => {
+      img.classList.toggle('opacity-100', i === index);
+      img.classList.toggle('opacity-0', i !== index);
+    });
+
+    dots.forEach((dot, i) => {
+      if (i === index) {
+        dot.classList.add('bg-white', 'w-6');
+        dot.classList.remove('bg-white/50', 'w-2');
+        if (isModal) {
+          dot.classList.add('w-8');
+          dot.classList.remove('w-3');
+        }
+      } else {
+        dot.classList.add('bg-white/50', isModal ? 'w-3' : 'w-2');
+        dot.classList.remove('bg-white', isModal ? 'w-8' : 'w-6');
+      }
+    });
+
+    if (counter) {
+      counter.textContent = `${index + 1} / ${totalImages}`;
+    }
+
+    if (isModal && modalCounter) {
+      modalCounter.textContent = `${index + 1} / ${totalImages}`;
+    }
+  }
+
+  function nextSlide(isModal = false) {
+    currentIndex = (currentIndex + 1) % totalImages;
+    showSlide(currentIndex, isModal);
+  }
+
+  function prevSlide(isModal = false) {
+    currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+    showSlide(currentIndex, isModal);
+  }
+
+  function goToSlide(index, isModal = false) {
+    currentIndex = index;
+    showSlide(currentIndex, isModal);
+  }
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayInterval = setInterval(() => nextSlide(false), 3000);
+  }
+
+  function stopAutoplay() {
+    if (autoplayInterval) {
+      clearInterval(autoplayInterval);
+    }
+  }
+
+  function openModal() {
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+    showSlide(currentIndex, true);
+    stopAutoplay();
+  }
+
+  function closeModal() {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = '';
+    startAutoplay();
+  }
+
+  if (slideshowPrev) {
+    slideshowPrev.addEventListener('click', (e) => {
+      e.stopPropagation();
+      prevSlide(false);
+      stopAutoplay();
+    });
+  }
+
+  if (slideshowNext) {
+    slideshowNext.addEventListener('click', (e) => {
+      e.stopPropagation();
+      nextSlide(false);
+      stopAutoplay();
+    });
+  }
+
+  slideshowDots.forEach((dot, index) => {
+    dot.addEventListener('click', (e) => {
+      e.stopPropagation();
+      goToSlide(index, false);
+      stopAutoplay();
+    });
+  });
+
+  if (slideshowContainer) {
+    slideshowContainer.addEventListener('click', openModal);
+  }
+
+  if (modalPrev) {
+    modalPrev.addEventListener('click', (e) => {
+      e.stopPropagation();
+      prevSlide(true);
+    });
+  }
+
+  if (modalNext) {
+    modalNext.addEventListener('click', (e) => {
+      e.stopPropagation();
+      nextSlide(true);
+    });
+  }
+
+  modalDots.forEach((dot, index) => {
+    dot.addEventListener('click', (e) => {
+      e.stopPropagation();
+      goToSlide(index, true);
+    });
+  });
+
+  if (modalClose) {
+    modalClose.addEventListener('click', closeModal);
+  }
+
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('flex')) {
+      closeModal();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (modal.classList.contains('flex')) {
+      if (e.key === 'ArrowLeft') {
+        prevSlide(true);
+      } else if (e.key === 'ArrowRight') {
+        nextSlide(true);
+      }
+    }
+  });
+
+  if (totalImages > 1) {
+    startAutoplay();
+  }
+
+  if (slideshowContainer) {
+    slideshowContainer.addEventListener('mouseenter', stopAutoplay);
+    slideshowContainer.addEventListener('mouseleave', () => {
+      if (!modal.classList.contains('flex')) {
+        startAutoplay();
+      }
+    });
+  }
+</script>

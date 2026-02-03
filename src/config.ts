@@ -19,7 +19,32 @@ export const projects = [
       en: 'A system for generating quality control reports for oil refineries',
       pt: 'Um sistema para gerar relatórios de controle de qualidade para refinarias de petróleo'
     },
-    image: '/project1.jpg',
+    images: [
+      '/projects/sispeq/1.jpg',
+      '/projects/sispeq/2.jpg',
+      '/projects/sispeq/3.jpg',
+      '/projects/sispeq/4.jpg',
+      '/projects/sispeq/5.jpg',
+      '/projects/sispeq/6.jpg',
+      '/projects/sispeq/7.jpg',
+      '/projects/sispeq/8.jpg',
+      '/projects/sispeq/9.jpg',
+      '/projects/sispeq/10.jpg',
+      '/projects/sispeq/11.jpg',
+      '/projects/sispeq/12.jpg',
+      '/projects/sispeq/13.jpg',
+      '/projects/sispeq/14.jpg',
+      '/projects/sispeq/15.jpg',
+      '/projects/sispeq/16.jpg',
+      '/projects/sispeq/17.jpg',
+      '/projects/sispeq/18.jpg',
+      '/projects/sispeq/19.jpg',
+      '/projects/sispeq/20.jpg',
+      '/projects/sispeq/21.jpg',
+      '/projects/sispeq/22.jpg',
+      '/projects/sispeq/23.jpg',
+      '/projects/sispeq/24.jpg'
+    ],
     github: 'https://github.com/guilhermenovais/sispeq-server'
   },
 ];
