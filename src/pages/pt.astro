@@ -7,10 +7,10 @@ import ProjectsSection from '../components/ProjectsSection.astro';
 import ExperienceSection from '../components/ExperienceSection.astro';
 import EducationSection from '../components/EducationSection.astro';
 
-const currentLocale = Astro.currentLocale || 'en';
+const currentLocale = 'pt';
 ---
 
-<Layout title="Portfolio" locale={currentLocale}>
+<Layout title="Portfólio" locale={currentLocale}>
 	<Header />
 	<main>
 		<HomeSection locale={currentLocale} />
@@ -20,5 +20,3 @@ const currentLocale = Astro.currentLocale || 'en';
 		<EducationSection locale={currentLocale} />
 	</main>
 </Layout>
-
-
