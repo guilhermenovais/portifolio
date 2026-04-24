@@ -47,6 +47,53 @@ export const projects = [
     ],
     github: 'https://github.com/guilhermenovais/sispeq-server'
   },
+  {
+    id: 2,
+    title: {
+      en: 'e-mobiliaria',
+      pt: 'e-mobiliaria'
+    },
+    description: {
+      en: 'A real estate management system for handling people, properties, contracts, receipts, and reports',
+      pt: 'Um sistema de gestão imobiliária para gerenciar partes, imóveis, contratos, recibos e relatórios'
+    },
+    images: [
+      '/projects/e-mobiliaria/01-initial-setup-step-1.png',
+      '/projects/e-mobiliaria/02-initial-setup-step-2.png',
+      '/projects/e-mobiliaria/03-initial-setup-step-3.png',
+      '/projects/e-mobiliaria/04-empty-dashboard.png',
+      '/projects/e-mobiliaria/05-empty-physical-people.png',
+      '/projects/e-mobiliaria/06-create-physical-person.png',
+      '/projects/e-mobiliaria/07-filled-physical-people.png',
+      '/projects/e-mobiliaria/08-empty-juridical-people.png',
+      '/projects/e-mobiliaria/09-create-juridical-person-1.png',
+      '/projects/e-mobiliaria/10-create-juridical-person-2.png',
+      '/projects/e-mobiliaria/11-filled-juridical-people.png',
+      '/projects/e-mobiliaria/12-empty-properties.png',
+      '/projects/e-mobiliaria/13-create-property.png',
+      '/projects/e-mobiliaria/14-filled-properties.png',
+      '/projects/e-mobiliaria/15-empty-contracts.png',
+      '/projects/e-mobiliaria/16-create-contract-step-1.png',
+      '/projects/e-mobiliaria/17-create-contract-step-2.png',
+      '/projects/e-mobiliaria/18-create-contract-step-3.png',
+      '/projects/e-mobiliaria/19-create-contract-step-4.png',
+      '/projects/e-mobiliaria/20-create-contract-step-5.png',
+      '/projects/e-mobiliaria/21-create-contract-step-6.png',
+      '/projects/e-mobiliaria/22-create-contract-step-7.png',
+      '/projects/e-mobiliaria/23-create-contract-step-8.png',
+      '/projects/e-mobiliaria/24-filled-contracts.png',
+      '/projects/e-mobiliaria/25-generated-contract-pdf.png',
+      '/projects/e-mobiliaria/26-empty-receipts.png',
+      '/projects/e-mobiliaria/27-create-receipt.png',
+      '/projects/e-mobiliaria/28-filled-receipts.png',
+      '/projects/e-mobiliaria/29-generated-receipt-pdf.png',
+      '/projects/e-mobiliaria/30-reports.png',
+      '/projects/e-mobiliaria/31-generated-rent-evolution-report-pdf.png',
+      '/projects/e-mobiliaria/32-generated-occupation-rate-report-pdf.png',
+      '/projects/e-mobiliaria/33-settings.png'
+    ],
+    github: 'https://github.com/guilhermenovais/e-mobiliaria'
+  },
 ];
 
 export const experiences = [
